@@ -1,47 +1,29 @@
-version: '3'
+networks:
+  db_net:
+  web_net:
+volumes:
+  db_data:
 services:
-  webui:
-    
-    build: ./webui
-    networks:
-      - web_net
-    ports:
-      - 80:80
-    depends_on:
-      - front
   front:
-    
     build: ./front
+    ports:
+        - "3000:3000"
     networks:
       - web_net
     depends_on:
       - back
   back:
-    
     build: ./back
     networks:
       - web_net
       - db_net
     depends_on:
-      - couchdb
-  couchdb:
+      - db
+  db:
     image: couchdb:2.1
-    ports:
-      - 5984:5984
-    volumes:
-      - couchdb_vol:/opt/couchdb/data
     networks:
-      - db_net
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == manager
-
-volumes:
-  couchdb_vol:
-
-networks:
-  db_net:
-    driver: overlay
-  web_net:
-    driver: overlay
+      db_net:
+        aliases:
+          - couchdb
+    volumes:
+      - db_data:/opt/couchdb/data
