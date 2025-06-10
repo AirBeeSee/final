@@ -12,7 +12,9 @@ jobs:
           uses: actions/checkout@v4
         - run: |
             cd back
-            docker build -t POPO_${{ github.sha }} .
+            docker build -t back_${{ github.sha }} .
+            cd ../front
+            docker build -t front_${{ github.sha }} .
 
 
    
