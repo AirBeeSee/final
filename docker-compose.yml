@@ -1,7 +1,7 @@
 version: '3'
 services:
   webui:
-    image: zbbfufu/docker-sfeir-webui:2.0
+    
     build: ./webui
     networks:
       - web_net
@@ -10,14 +10,14 @@ services:
     depends_on:
       - front
   front:
-    image: zbbfufu/docker-sfeir-front:2.0
+    
     build: ./front
     networks:
       - web_net
     depends_on:
       - back
   back:
-    image: zbbfufu/docker-sfeir-back:2.0
+    
     build: ./back
     networks:
       - web_net
