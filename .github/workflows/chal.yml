@@ -4,7 +4,6 @@ on:
 
 jobs:
 
-
   docker-build:
   
     runs-on: ubuntu-latest
@@ -12,4 +11,7 @@ jobs:
         - name: checkout
           uses: actions/checkout@v4
         - run: |
-            docker compose create
+            docker build -t ${{ github.sha }} .
+
+
+   
