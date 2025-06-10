@@ -12,9 +12,9 @@ jobs:
           uses: actions/checkout@v4
         - run: |
             cd back
-            docker build -t back_${{ github.sha }} .
+            docker build -t back_${GITHUB_SHA::7} .
             cd ../front
-            docker build -t front_${{ github.sha }} .
+            docker build -t front_${GITHUB_SHA::7} .
 
 
    
